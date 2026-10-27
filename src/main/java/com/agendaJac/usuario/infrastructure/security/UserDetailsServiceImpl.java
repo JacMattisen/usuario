@@ -1,8 +1,8 @@
-package com.javanauta.aprendendospring.infrastructure.security;
+package com.agendaJac.usuario.infrastructure.security;
 
-import com.javanauta.aprendendospring.infrastructure.entity.Usuario;
-import com.javanauta.aprendendospring.infrastructure.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.agendaJac.usuario.infrastructure.entity.Usuario;
+import com.agendaJac.usuario.infrastructure.repository.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,10 +12,15 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     // Repositório para acessar dados de usuário no banco de dados
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
-    // Implementação do método para carregar detalhes do usuário pelo e-mail
+    private final UsuarioRepository usuarioRepository;
+
+    public UserDetailsServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    // Implementação do metodo para carregar detalhes do usuário pelo e-mail
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Busca o usuário no banco de dados pelo e-mail
